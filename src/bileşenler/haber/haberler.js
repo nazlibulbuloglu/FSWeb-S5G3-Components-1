@@ -115,3 +115,67 @@ const data = [
   Adım 5: Veri dizisine yeni haber nesnesi eklemeyi deneyin. Diğer verilerle aynı yapıda olmasına dikkat edin.
   Eklediğiniz yeni haberi görmek için sayfayı yenileyin.
 */
+
+
+
+function haberYapici(haberler) {
+  const haberDugumu = document.createElement('div');
+  haberDugumu.classList.add('article');
+  
+  for (let i = 0; i < haberler.length; i++) {
+  const haber = haberler[i];
+  const { baslik, tarih, ilkParagraf, ikinciParagraf, ucuncuParagraf } = haber;  
+ 
+  const baslikDugumu = document.createElement('h2');
+  baslikDugumu.textContent = baslik;
+  haberDugumu.appendChild(baslikDugumu);
+  
+  const tarihDugumu = document.createElement('p');
+  tarihDugumu.classList.add('tarih');
+  tarihDugumu.textContent = tarih;
+  haberDugumu.appendChild(tarihDugumu);
+  
+  const ilkParagrafDugumu = document.createElement('p');
+  ilkParagrafDugumu.textContent = ilkParagraf;
+  haberDugumu.appendChild(ilkParagrafDugumu);
+  
+  const ikinciParagrafDugumu = document.createElement('p');
+  ikinciParagrafDugumu.textContent = ikinciParagraf;
+  haberDugumu.appendChild(ikinciParagrafDugumu);
+  
+  const ucuncuParagrafDugumu = document.createElement('p');
+  ucuncuParagrafDugumu.textContent = ucuncuParagraf;
+  haberDugumu.appendChild(ucuncuParagrafDugumu);
+  }
+  
+  const expandButtonDugumu = document.createElement('span');
+  expandButtonDugumu.classList.add('expandButton');
+  expandButtonDugumu.textContent = '+';
+  expandButtonDugumu.addEventListener('click', () => {
+  haberDugumu.classList.toggle('article-open');
+  });
+  haberDugumu.appendChild(expandButtonDugumu);
+  
+  return haberDugumu;
+  }
+  
+  
+  const articlesDugumu = document.querySelector('.articles');
+  
+  for (let i = 0; i < data.length; i++) {
+  const haberler = data[i];
+  const haberDugumu = haberYapici([haberler]);
+  articlesDugumu.appendChild(haberDugumu);
+  }
+  
+  
+  const yeniHaber = {
+  baslik: 'Yeni Haber Başlığı',
+  tarih: '3 Mayıs 2023',
+  ilkParagraf: 'Bu bir yeni haberdir.',
+  ikinciParagraf: 'Bu yeni haber daha fazla bilgi içerir.',
+  ucuncuParagraf: 'Bu yeni haber son paragrafı ile tamamlanır.'
+  };
+  
+  const yeniHaberDugumu = haberYapici([yeniHaber]);
+  articlesDugumu.appendChild(yeniHaberDugumu);
